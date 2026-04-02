@@ -1,0 +1,2060 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="description" content="AccuCore Nexus 2025 - المنصة التعليمية المتكاملة للمحاسبة والإدارة والاقتصاد والتأمين">
+    <meta name="keywords" content="تعليم, محاسبة, إدارة, اقتصاد, تأمين, فيديوهات تعليمية">
+    <meta name="author" content="AccuCore">
+    <title>AccuCore Nexus 2025 | المنصة التعليمية المتكاملة</title>
+    
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================================
+           TABLE OF CONTENTS
+           1. CSS Variables & Theme System
+           2. Reset & Base Styles
+           3. Premium Header & Navigation
+           4. Hero Section
+           5. Subject Tabs
+           6. Video Cards
+           7. Newsletter Section
+           8. Footer
+           9. Back to Top & Progress Bar
+           10. Lock Screen Styles
+           11. Responsive Design
+           12. User Profile & Dropdown
+        ============================================ */
+
+        /* ---------- 1. CSS VARIABLES ---------- */
+        :root {
+            --color-primary: #14b8a6;
+            --color-primary-dark: #0d9488;
+            --color-primary-light: #5eead4;
+            --color-secondary: #8b5cf6;
+            --color-secondary-dark: #7c3aed;
+            --color-secondary-light: #a78bfa;
+            --color-accent: #f59e0b;
+            --color-accent-dark: #d97706;
+            --color-danger: #ef4444;
+            --color-success: #10b981;
+            --color-warning: #f59e0b;
+            --color-info: #3b82f6;
+            
+            --gradient-primary: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            --gradient-primary-reverse: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
+            --gradient-hover: linear-gradient(135deg, var(--color-primary-dark), var(--color-secondary-dark));
+            --gradient-accent: linear-gradient(135deg, var(--color-accent), #eab308);
+            --gradient-danger: linear-gradient(135deg, var(--color-danger), #dc2626);
+            --gradient-success: linear-gradient(135deg, var(--color-success), #059669);
+            --gradient-glow: radial-gradient(circle at 30% 20%, rgba(20, 184, 166, 0.15), transparent 70%);
+            
+            --bg-light: #f8fafc;
+            --surface-light: #ffffff;
+            --surface-elevated-light: #f1f5f9;
+            --surface-hover-light: #e2e8f0;
+            --text-light-primary: #0f172a;
+            --text-light-secondary: #475569;
+            --text-light-muted: #64748b;
+            --border-light: #e2e8f0;
+            
+            --bg-dark: #0a0c15;
+            --surface-dark: #11131f;
+            --surface-elevated-dark: #1a1d2b;
+            --surface-hover-dark: #252a3a;
+            --text-dark-primary: #f1f5f9;
+            --text-dark-secondary: #94a3b8;
+            --text-dark-muted: #64748b;
+            --border-dark: #1e293b;
+            
+            --transition-fast: 0.2s ease;
+            --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --shadow-glow: 0 0 20px rgba(20, 184, 166, 0.3);
+            --shadow-glow-purple: 0 0 20px rgba(139, 92, 246, 0.3);
+            
+            --radius-sm: 0.5rem;
+            --radius-md: 1rem;
+            --radius-lg: 1.5rem;
+            --radius-xl: 2rem;
+            --radius-2xl: 2.5rem;
+            --radius-full: 9999px;
+        }
+
+        /* ---------- 2. RESET & BASE STYLES ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            line-height: 1.6;
+            transition: background-color var(--transition-smooth), color var(--transition-smooth);
+            overflow-x: hidden;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-light-primary);
+        }
+
+        body.dark-mode {
+            background-color: var(--bg-dark);
+            color: var(--text-dark-primary);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        section {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ---------- 3. PREMIUM HEADER & NAVIGATION ---------- */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all var(--transition-smooth);
+        }
+
+        .header.scrolled {
+            padding: 0.7rem 0;
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow-lg);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        body.dark-mode .header.scrolled {
+            background: rgba(10, 12, 21, 0.95);
+            border-bottom: 1px solid var(--border-dark);
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        /* Logo */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-smooth);
+            box-shadow: var(--shadow-md);
+        }
+
+        .logo:hover .logo-icon {
+            transform: scale(1.05) rotate(5deg);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .logo-icon i {
+            font-size: 1.6rem;
+            color: white;
+        }
+
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-badge {
+            background: var(--gradient-accent);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.2rem 0.6rem;
+            border-radius: var(--radius-full);
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+
+        /* Desktop Navigation */
+        .nav-desktop {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            padding: 0.6rem 1.3rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            text-decoration: none;
+            color: var(--text-light-secondary);
+            transition: all var(--transition-fast);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+        }
+
+        body.dark-mode .nav-link {
+            color: var(--text-dark-secondary);
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: all var(--transition-fast);
+            transform: translateX(50%);
+        }
+
+        .nav-link:hover::before {
+            width: 80%;
+        }
+
+        .nav-link:hover {
+            background: var(--gradient-primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* User Profile Dropdown */
+        .user-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .user-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            background: var(--surface-light);
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        body.dark-mode .user-btn {
+            background: var(--surface-dark);
+            border-color: var(--border-dark);
+        }
+
+        .user-btn:hover {
+            background: var(--gradient-primary);
+            border-color: transparent;
+            color: white;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            margin-top: 0.5rem;
+            background: var(--surface-light);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-xl);
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-smooth);
+            z-index: 100;
+        }
+
+        body.dark-mode .dropdown-menu {
+            background: var(--surface-dark);
+            border-color: var(--border-dark);
+        }
+
+        .user-dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            text-decoration: none;
+            color: var(--text-light-primary);
+            transition: all var(--transition-fast);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        body.dark-mode .dropdown-item {
+            color: var(--text-dark-primary);
+            border-color: var(--border-dark);
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .logout-btn {
+            color: var(--color-danger);
+        }
+
+        .logout-btn:hover {
+            background: var(--gradient-danger);
+            color: white;
+        }
+
+        /* Search Bar */
+        .search-wrapper {
+            position: relative;
+        }
+
+        .search-input {
+            background: var(--surface-light);
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-full);
+            padding: 0.7rem 1rem 0.7rem 2.5rem;
+            font-size: 0.9rem;
+            width: 240px;
+            transition: all var(--transition-fast);
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body.dark-mode .search-input {
+            background: var(--surface-dark);
+            border-color: var(--border-dark);
+            color: var(--text-dark-primary);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.15);
+            width: 280px;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light-secondary);
+            font-size: 0.9rem;
+            transition: color var(--transition-fast);
+        }
+
+        .search-input:focus + .search-icon,
+        .search-wrapper:hover .search-icon {
+            color: var(--color-primary);
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: var(--surface-light);
+            border: 2px solid var(--border-light);
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            color: var(--text-light-secondary);
+        }
+
+        body.dark-mode .theme-toggle {
+            background: var(--surface-dark);
+            border-color: var(--border-dark);
+            color: var(--text-dark-secondary);
+        }
+
+        .theme-toggle:hover {
+            background: var(--gradient-primary);
+            border-color: transparent;
+            color: white;
+            transform: scale(1.05) rotate(15deg);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: var(--surface-light);
+            border: 2px solid var(--border-light);
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-full);
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: all var(--transition-fast);
+        }
+
+        .mobile-menu-btn:hover {
+            background: var(--gradient-primary);
+            border-color: transparent;
+            color: white;
+        }
+
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 350px;
+            height: 100vh;
+            background: var(--surface-light);
+            z-index: 1001;
+            transition: right var(--transition-smooth);
+            padding: 5rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            box-shadow: var(--shadow-2xl);
+        }
+
+        body.dark-mode .mobile-nav {
+            background: var(--surface-dark);
+        }
+
+        .mobile-nav.active {
+            right: 0;
+        }
+
+        .mobile-nav-link {
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-weight: 600;
+            color: var(--text-light-primary);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all var(--transition-fast);
+        }
+
+        body.dark-mode .mobile-nav-link {
+            color: var(--text-dark-primary);
+        }
+
+        .mobile-nav-link:hover {
+            background: var(--gradient-primary);
+            color: white;
+            transform: translateX(-5px);
+        }
+
+        .mobile-nav-close {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light-secondary);
+            transition: all var(--transition-fast);
+        }
+
+        .mobile-nav-close:hover {
+            color: var(--color-danger);
+            transform: rotate(90deg);
+        }
+
+        /* ---------- 4. HERO SECTION ---------- */
+        .hero {
+            padding: 9rem 0 5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-glow);
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to top, var(--bg-light), transparent);
+            pointer-events: none;
+        }
+
+        body.dark-mode .hero::after {
+            background: linear-gradient(to top, var(--bg-dark), transparent);
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: var(--text-light-secondary);
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-light-secondary);
+        }
+
+        .hero-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--gradient-primary);
+            padding: 1rem 2.5rem;
+            border-radius: var(--radius-full);
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all var(--transition-smooth);
+            box-shadow: var(--shadow-md);
+            animation: fadeInUp 0.8s ease 0.6s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .hero-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* ---------- 5. SUBJECT TABS ---------- */
+        .subjects-section {
+            margin: 3rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            color: var(--text-light-secondary);
+        }
+
+        .tabs-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .tab-btn {
+            background: var(--surface-light);
+            border: 2px solid var(--border-light);
+            padding: 0.75rem 1.8rem;
+            border-radius: var(--radius-full);
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--text-light-primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark-mode .tab-btn {
+            background: var(--surface-dark);
+            border-color: var(--border-dark);
+            color: var(--text-dark-primary);
+        }
+
+        .tab-btn::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+            transition: all var(--transition-smooth);
+            transform: translateX(50%);
+        }
+
+        .tab-btn.active::before,
+        .tab-btn:hover::before {
+            width: 100%;
+        }
+
+        .tab-btn.active,
+        .tab-btn:hover {
+            background: var(--gradient-primary);
+            border-color: transparent;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* ---------- 6. VIDEO CARDS ---------- */
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .video-card {
+            background: var(--surface-light);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            transition: all var(--transition-smooth);
+            border: 1px solid var(--border-light);
+            cursor: pointer;
+            position: relative;
+        }
+
+        body.dark-mode .video-card {
+            background: var(--surface-dark);
+            border-color: var(--border-dark);
+        }
+
+        .video-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity var(--transition-smooth);
+            z-index: 0;
+            border-radius: var(--radius-xl);
+        }
+
+        .video-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-2xl);
+        }
+
+        .video-thumbnail {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--surface-elevated-light);
+        }
+
+        body.dark-mode .video-thumbnail {
+            background-color: var(--surface-elevated-dark);
+        }
+
+        .video-thumbnail::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.5));
+            transition: background var(--transition-fast);
+        }
+
+        .video-card:hover .video-thumbnail::after {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.4));
+        }
+
+        .play-icon {
+            position: relative;
+            z-index: 2;
+            font-size: 4rem;
+            color: white;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+            transition: all var(--transition-smooth);
+        }
+
+        .video-card:hover .play-icon {
+            transform: scale(1.15);
+            filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.5));
+        }
+
+        .video-duration {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 0.2rem 0.6rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.7rem;
+            color: white;
+            z-index: 2;
+        }
+
+        .video-info {
+            padding: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .video-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .video-description {
+            font-size: 0.85rem;
+            color: var(--text-light-secondary);
+            margin-bottom: 1.25rem;
+            line-height: 1.6;
+        }
+
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .video-views {
+            font-size: 0.75rem;
+            color: var(--text-light-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .watch-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: transparent;
+            border: 2px solid var(--color-primary);
+            padding: 0.6rem 1.5rem;
+            border-radius: var(--radius-full);
+            font-weight: 700;
+            color: var(--color-primary);
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            width: 100%;
+            justify-content: center;
+        }
+
+        .watch-btn:hover {
+            background: var(--gradient-primary);
+            border-color: transparent;
+            color: white;
+            transform: translateX(-5px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .subject-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--gradient-primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: var(--radius-full);
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: white;
+            z-index: 2;
+            backdrop-filter: blur(4px);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 4rem;
+            color: var(--text-light-secondary);
+            font-size: 1.1rem;
+            background: var(--surface-light);
+            border-radius: var(--radius-xl);
+            border: 2px dashed var(--border-light);
+        }
+
+        /* ---------- 7. NEWSLETTER SECTION ---------- */
+        .newsletter {
+            background: var(--gradient-primary);
+            border-radius: var(--radius-2xl);
+            padding: 3.5rem 2rem;
+            margin: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .newsletter h2 {
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .newsletter p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: var(--radius-full);
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            box-shadow: var(--shadow-lg);
+        }
+
+        body.dark-mode .newsletter-form {
+            background: var(--surface-dark);
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: none;
+            font-size: 1rem;
+            outline: none;
+            background: transparent;
+            color: var(--text-light-primary);
+        }
+
+        .newsletter-input::placeholder {
+            color: var(--text-light-secondary);
+        }
+
+        .newsletter-btn {
+            background: var(--color-accent);
+            border: none;
+            padding: 0 2rem;
+            font-weight: 700;
+            cursor: pointer;
+            color: white;
+            transition: all var(--transition-fast);
+        }
+
+        .newsletter-btn:hover {
+            background: var(--color-accent-dark);
+            transform: scale(1.02);
+        }
+
+        /* ---------- 8. FOOTER ---------- */
+        .footer {
+            background: var(--surface-light);
+            border-top: 1px solid var(--border-light);
+            padding: 3rem 0 1.5rem;
+            margin-top: 3rem;
+        }
+
+        body.dark-mode .footer {
+            background: var(--surface-dark);
+            border-color: var(--border-dark);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-full);
+        }
+
+        .footer-section p {
+            color: var(--text-light-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: var(--surface-elevated-light);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-smooth);
+            color: var(--text-light-secondary);
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: var(--gradient-primary);
+            color: white;
+            transform: translateY(-3px) rotate(360deg);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-light);
+            color: var(--text-light-secondary);
+            font-size: 0.85rem;
+        }
+
+        /* ---------- 9. BACK TO TOP & PROGRESS BAR ---------- */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: var(--gradient-primary);
+            z-index: 1002;
+            transition: width 0.1s ease;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-smooth);
+            z-index: 99;
+            box-shadow: var(--shadow-md);
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* ---------- 10. LOCK SCREEN STYLES ---------- */
+        .lock-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(15px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .lock-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .lock-card {
+            background: var(--surface-light);
+            border-radius: var(--radius-2xl);
+            padding: 2.5rem;
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            box-shadow: var(--shadow-2xl);
+            border: 1px solid var(--border-light);
+            animation: scaleIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        body.dark-mode .lock-card {
+            background: var(--surface-dark);
+            border-color: var(--border-dark);
+        }
+
+        .lock-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .lock-icon i {
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .lock-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .lock-subtitle {
+            color: var(--text-light-secondary);
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+            text-align: right;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-light-primary);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            transition: all var(--transition-fast);
+            background: var(--surface-light);
+            color: var(--text-light-primary);
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body.dark-mode .input-group input {
+            background: var(--surface-dark);
+            border-color: var(--border-dark);
+            color: var(--text-dark-primary);
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.2);
+        }
+
+        .lock-btn {
+            width: 100%;
+            padding: 0.9rem;
+            background: var(--gradient-primary);
+            border: none;
+            border-radius: var(--radius-md);
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .lock-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .error-message {
+            background: var(--color-danger);
+            color: white;
+            padding: 0.7rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        /* Welcome Toast */
+        .welcome-toast {
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: var(--gradient-success);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            z-index: 1003;
+            transition: transform 0.3s ease;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .welcome-toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* ---------- 11. RESPONSIVE DESIGN ---------- */
+        @media (max-width: 1024px) {
+            .nav-desktop {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: flex;
+            }
+            .hero-title {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+            .hero {
+                padding: 7rem 0 3rem;
+            }
+            .hero-title {
+                font-size: 2rem;
+            }
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            .hero-stats {
+                gap: 1rem;
+            }
+            .stat-number {
+                font-size: 1.5rem;
+            }
+            .videos-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .search-wrapper {
+                display: none;
+            }
+            .logo-text {
+                font-size: 1.3rem;
+            }
+            .logo-icon {
+                width: 40px;
+                height: 40px;
+            }
+            .logo-icon i {
+                font-size: 1.3rem;
+            }
+            .newsletter h2 {
+                font-size: 1.5rem;
+            }
+            .newsletter-form {
+                flex-direction: column;
+                border-radius: var(--radius-md);
+            }
+            .newsletter-input {
+                padding: 0.8rem;
+                text-align: center;
+            }
+            .newsletter-btn {
+                padding: 0.8rem;
+            }
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+            .tabs-container {
+                gap: 0.5rem;
+            }
+            .tab-btn {
+                padding: 0.5rem 1.2rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .lock-card {
+                padding: 1.5rem;
+            }
+            .lock-title {
+                font-size: 1.5rem;
+            }
+            .hero-stats {
+                flex-wrap: wrap;
+            }
+            .stat-item {
+                flex: 1;
+                min-width: 80px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .video-card {
+            animation: fadeIn 0.6s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+         LOCK SCREEN - STUDENT LOGIN
+         🎯 مصفوفة الطلاب موجودة في الـ JavaScript
+         🎯 حقول الإدخال: studentCode و studentPassword
+    ============================================ -->
+    <div class="lock-screen" id="lockScreen">
+        <div class="lock-card">
+            <div class="lock-icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h2 class="lock-title">AccuCore Nexus</h2>
+            <p class="lock-subtitle">أدخل كود الطالب وكلمة المرور للوصول إلى المحتوى التعليمي</p>
+            
+            <div class="error-message" id="lockError">
+                <i class="fas fa-exclamation-triangle"></i> كود الطالب أو كلمة المرور غير صحيحة
+            </div>
+            
+            <div class="input-group">
+                <label><i class="fas fa-id-card"></i> كود الطالب</label>
+                <input type="text" id="studentCode" placeholder="مثال: 2024001" required autocomplete="off">
+            </div>
+            
+            <div class="input-group">
+                <label><i class="fas fa-key"></i> كلمة المرور</label>
+                <input type="password" id="studentPassword" placeholder="••••••••" required>
+            </div>
+            
+            <button class="lock-btn" id="unlockBtn">
+                <i class="fas fa-arrow-left"></i> دخول إلى المنصة
+            </button>
+            
+            <p style="margin-top: 1.5rem; font-size: 0.7rem; color: var(--text-light-muted);">
+                <i class="fas fa-shield-alt"></i> منصة تعليمية آمنة
+            </p>
+        </div>
+    </div>
+
+    <!-- Welcome Toast -->
+    <div class="welcome-toast" id="welcomeToast"></div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-container">
+                <a href="#" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="logo-text">
+                        AccuCore<span class="logo-badge">2025</span>
+                    </div>
+                </a>
+                
+                <nav class="nav-desktop">
+                    <a href="#hero" class="nav-link"><i class="fas fa-home"></i> الرئيسية</a>
+                    <a href="#subjects" class="nav-link"><i class="fas fa-graduation-cap"></i> المواد</a>
+                    <a href="#contact" class="nav-link"><i class="fas fa-envelope"></i> تواصل</a>
+                    
+                    <!-- User Dropdown (يظهر بعد تسجيل الدخول) -->
+                    <div class="user-dropdown" id="userDropdown" style="display: none;">
+                        <div class="user-btn">
+                            <span class="user-avatar" id="userAvatar">أ</span>
+                            <span id="userName">الطالب</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="dropdown-menu">
+                            <a href="#" class="dropdown-item" id="profileBtn">
+                                <i class="fas fa-user"></i> ملفي الشخصي
+                            </a>
+                            <a href="#" class="dropdown-item" id="myCoursesBtn">
+                                <i class="fas fa-book-open"></i> دوراتي
+                            </a>
+                            <a href="#" class="dropdown-item" id="certificatesBtn">
+                                <i class="fas fa-certificate"></i> شهاداتي
+                            </a>
+                            <div class="dropdown-item logout-btn" id="logoutBtn">
+                                <i class="fas fa-sign-out-alt"></i> تسجيل خروج
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+                
+                <div class="search-wrapper">
+                    <input type="text" class="search-input" id="searchInput" placeholder="ابحث عن فيديو...">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+                
+                <button class="theme-toggle" id="themeToggle" title="تغيير المظهر">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <button class="mobile-nav-close" id="mobileNavClose">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="#hero" class="mobile-nav-link"><i class="fas fa-home"></i> الرئيسية</a>
+        <a href="#subjects" class="mobile-nav-link"><i class="fas fa-graduation-cap"></i> المواد الدراسية</a>
+        <a href="#contact" class="mobile-nav-link"><i class="fas fa-envelope"></i> اتصل بنا</a>
+        <div style="margin-top: 1rem;">
+            <div class="search-wrapper" style="display: block; width: 100%;">
+                <input type="text" id="mobileSearchInput" class="search-input" placeholder="ابحث عن فيديو..." style="width: 100%;">
+                <i class="fas fa-search search-icon" style="right: 1rem;"></i>
+            </div>
+        </div>
+        <hr style="margin: 1rem 0; border-color: var(--border-light);">
+        <div id="mobileUserInfo" style="display: none;">
+            <div class="mobile-nav-link" id="mobileProfileBtn">
+                <i class="fas fa-user"></i> ملفي الشخصي
+            </div>
+            <div class="mobile-nav-link logout-btn" id="mobileLogoutBtn" style="color: var(--color-danger);">
+                <i class="fas fa-sign-out-alt"></i> تسجيل خروج
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <h1 class="hero-title" id="heroTitle">AccuCore Nexus 2025</h1>
+            <p class="hero-subtitle">منصة تعليمية متكاملة | 7 مسارات دراسية احترافية | أكثر من 40 فيديو تعليمي بجودة عالية</p>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number">7</div>
+                    <div class="stat-label">مسارات دراسية</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">42+</div>
+                    <div class="stat-label">فيديو تعليمي</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">دعم فني</div>
+                </div>
+            </div>
+            
+            <a href="#subjects" class="hero-btn"><i class="fas fa-arrow-down"></i> استكشف المواد</a>
+        </div>
+    </section>
+
+    <!-- Subjects Section -->
+    <section id="subjects" class="subjects-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>المسارات الدراسية</h2>
+                <p>اختر تخصصك وابدأ رحلة التعلم</p>
+            </div>
+            <div class="tabs-container" id="tabsContainer"></div>
+            <div id="videosContainer" class="videos-grid"></div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section id="contact" class="container">
+        <div class="newsletter">
+            <h2>انضم إلى مجتمع AccuCore</h2>
+            <p>احصل على أحدث المحتويات والدروس مباشرة إلى بريدك الإلكتروني</p>
+            <form class="newsletter-form" id="subscribeForm">
+                <input type="email" class="newsletter-input" placeholder="بريدك الإلكتروني" required>
+                <button type="submit" class="newsletter-btn"><i class="fas fa-paper-plane"></i> اشتراك</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-chart-line"></i> AccuCore 2025</h3>
+                    <p>منصة تعليمية متطورة في المحاسبة والإدارة والاقتصاد والتأمين، تقدم محتوى احترافي بجودة عالية.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>المواد الدراسية</h3>
+                    <p><i class="fas fa-shield-alt"></i> التأمين</p>
+                    <p><i class="fas fa-chart-line"></i> المحاسبة الإدارية</p>
+                    <p><i class="fas fa-truck"></i> إدارة مواد وامداد</p>
+                    <p><i class="fas fa-globe"></i> اقتصاد دولي</p>
+                    <p><i class="fas fa-file-invoice"></i> المحاسبة الضريبية</p>
+                    <p><i class="fas fa-clipboard-list"></i> الرقابة والمراجعة</p>
+                    <p><i class="fas fa-users"></i> الموارد البشرية</p>
+                </div>
+                <div class="footer-section">
+                    <h3>تواصل معنا</h3>
+                    <p><i class="fas fa-envelope"></i> support@accucore.com</p>
+                    <p><i class="fas fa-phone"></i> +20 123 456 7890</p>
+                    <p><i class="fas fa-map-marker-alt"></i> كلية التجارة - جامعة دمنهور</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 AccuCore Nexus - جميع الحقوق محفوظة | تصميم وتطوير فريق AccuCore</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // ============================================
+        // 🎯 مصفوفة الطلاب - عدل هنا لإضافة الطلاب
+        // ============================================
+        const STUDENTS = [
+           { code: "2024002", password: "123456", name: "سارة علي", role: "student", email: "sara@accucore.com", avatar: "س" },
+            { code: "2024002", password: "123456", name: "سارة علي", role: "student", email: "sara@accucore.com", avatar: "س" },
+            { code: "2024003", password: "123456", name: "محمد إبراهيم", role: "student", email: "mohamed@accucore.com", avatar: "م" },
+            { code: "2024004", password: "123456", name: "فاطمة حسن", role: "student", email: "fatma@accucore.com", avatar: "ف" },
+            { code: "2024005", password: "123456", name: "عمر وائل", role: "student", email: "omar@accucore.com", avatar: "ع" },
+            { code: "2024006", password: "123456", name: "ليلى محمود", role: "student", email: "laila@accucore.com", avatar: "ل" },
+            { code: "2024007", password: "123456", name: "يوسف كريم", role: "student", email: "youssef@accucore.com", avatar: "ي" },
+            { code: "2024008", password: "123456", name: "نورا سعيد", role: "student", email: "nora@accucore.com", avatar: "ن" },
+            { code: "2024009", password: "123456", name: "خالد عبدالله", role: "student", email: "khaled@accucore.com", avatar: "خ" },
+            { code: "ADMIN", password: "admin123", name: "المدير", role: "admin", email: "admin@accucore.com", avatar: "م" },
+            { code: "TRAINER", password: "trainer123", name: "المدرب", role: "trainer", email: "trainer@accucore.com", avatar: "د" }
+        ];
+
+        let currentUser = null;
+
+        // ============================================
+        // LOCK SCREEN VALIDATION
+        // ============================================
+        function validateStudent() {
+            const enteredCode = document.getElementById('studentCode').value.trim();
+            const enteredPassword = document.getElementById('studentPassword').value;
+            const errorDiv = document.getElementById('lockError');
+            
+            const student = STUDENTS.find(s => s.code === enteredCode && s.password === enteredPassword);
+            
+            if (student) {
+                errorDiv.classList.remove('show');
+                currentUser = student;
+                return true;
+            } else {
+                errorDiv.classList.add('show');
+                document.getElementById('studentPassword').value = '';
+                return false;
+            }
+        }
+        
+        function showWelcomeToast() {
+            const toast = document.getElementById('welcomeToast');
+            toast.innerHTML = `<i class="fas fa-hand-peace"></i> مرحباً ${currentUser.name}! welcome to AccuCore Nexus`;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        function updateUserInterface() {
+            if (currentUser) {
+                // تحديث الـ User Dropdown
+                const userDropdown = document.getElementById('userDropdown');
+                const userName = document.getElementById('userName');
+                const userAvatar = document.getElementById('userAvatar');
+                
+                userDropdown.style.display = 'block';
+                userName.textContent = currentUser.name;
+                userAvatar.textContent = currentUser.avatar;
+                
+                // تحديث الموبايل
+                const mobileUserInfo = document.getElementById('mobileUserInfo');
+                mobileUserInfo.style.display = 'block';
+                
+                // إضافة اسم المستخدم في الموبايل
+                const mobileUserName = document.createElement('div');
+                mobileUserName.className = 'mobile-nav-link';
+                mobileUserName.innerHTML = `<i class="fas fa-user-circle"></i> مرحباً ${currentUser.name}`;
+                mobileUserInfo.insertBefore(mobileUserName, mobileUserInfo.firstChild);
+            }
+        }
+        
+        function unlockContent() {
+            const lockScreen = document.getElementById('lockScreen');
+            lockScreen.classList.add('hidden');
+            localStorage.setItem('accucore_logged_in', 'true');
+            localStorage.setItem('accucore_user', JSON.stringify(currentUser));
+            
+            updateUserInterface();
+            showWelcomeToast();
+        }
+        
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('accucore_logged_in');
+            localStorage.removeItem('accucore_user');
+            
+            // إعادة تعيين واجهة المستخدم
+            document.getElementById('userDropdown').style.display = 'none';
+            document.getElementById('mobileUserInfo').style.display = 'none';
+            
+            // إظهار شاشة القفل
+            const lockScreen = document.getElementById('lockScreen');
+            lockScreen.classList.remove('hidden');
+            
+            // مسح الحقول
+            document.getElementById('studentCode').value = '';
+            document.getElementById('studentPassword').value = '';
+        }
+        
+        function checkLoginStatus() {
+            const isLoggedIn = localStorage.getItem('accucore_logged_in');
+            const savedUser = localStorage.getItem('accucore_user');
+            
+            if (isLoggedIn === 'true' && savedUser) {
+                currentUser = JSON.parse(savedUser);
+                document.getElementById('lockScreen').classList.add('hidden');
+                updateUserInterface();
+            }
+        }
+        
+        // ============================================
+        // VIDEO DATA - 7 SUBJECTS WITH 6 VIDEOS EACH
+        // ============================================
+        const subjectsData = [
+            { id: "insurance", name: "التأمين", icon: "fas fa-shield-alt", videos: [
+                { title: "مقدمة في علم التأمين", desc: "تعريف التأمين - أنواعه - أهميته في العصر الحديث", duration: "25:30", views: "1.2K", url: "https://www.youtube.com/watch?v=1hWbccrddAI" },
+                { title: "التأمين الصحي الشامل", desc: "تحليل شامل لنماذج التأمين الصحي وأنظمته حول العالم", duration: "32:15", views: "890", url: "https://youtu.be/gHcE1UoVcR4" },
+                { title: "تأمينات الحياة والتخطيط المالي", desc: "استراتيجيات إدارة وثائق التأمين والتخطيط للمستقبل", duration: "28:45", views: "1.5K", url: "https://youtu.be/XvXs8R1kW0U" },
+                { title: "إدارة المخاطر في شركات التأمين", desc: "أساليب قياس وتحليل المخاطر المالية في قطاع التأمين", duration: "35:20", views: "720", url: "https://youtu.be/FkYjl1lE_5I" },
+                { title: "التأمين البحري والجوي", desc: "تغطيات ومخاطر النقل الدولي في التأمين", duration: "22:10", views: "560", url: "https://youtu.be/1A8fT4lPTow" },
+                { title: "إعادة التأمين واستراتيجياتها", desc: "كيفية توزيع المخاطر بين شركات التأمين", duration: "30:00", views: "430", url: "https://youtu.be/ALGmPQtBGpY" }
+            ]},
+            { id: "manacc", name: "المحاسبة الإدارية", icon: "fas fa-chart-line", videos: [
+                { title: "مدخل إلى المحاسبة الإدارية", desc: "الفرق بين المحاسبة المالية والإدارية وأهميتها", duration: "28:30", views: "2.1K", url: "https://youtu.be/Mj-DyLnpVTs" },
+                { title: "تحليل التكلفة-حجم-الربح", desc: "نقطة التعادل واتخاذ القرارات الاستراتيجية", duration: "34:20", views: "1.8K", url: "https://youtu.be/7O1Vq5-0CAI" },
+                { title: "الموازنات التخطيطية", desc: "إعداد الموازنات التشغيلية والرأسمالية", duration: "31:15", views: "1.4K", url: "https://youtu.be/_B8lYq-4HqA" },
+                { title: "المحاسبة على أساس النشاط ABC", desc: "توزيع التكاليف بدقة عالية", duration: "29:45", views: "980", url: "https://youtu.be/NgxxS7pWYmw" },
+                { title: "تقارير الأداء والانحرافات", desc: "تحليل الفروق واتخاذ الإجراءات التصحيحية", duration: "27:30", views: "760", url: "https://youtu.be/sYBSCL0oSQw" },
+                { title: "اتخاذ القرارات الاستراتيجية", desc: "التسعير والمزيج المنتج الأمثل", duration: "33:20", views: "650", url: "https://youtu.be/PWJ5KlT2ZDo" }
+            ]},
+            { id: "supply", name: "إدارة مواد وامداد", icon: "fas fa-truck", videos: [
+                { title: "أسس إدارة سلسلة التوريد", desc: "من المورد إلى العميل - نظرة شاملة", duration: "36:40", views: "1.1K", url: "https://youtu.be/Mi1QBxVjZAw" },
+                { title: "تخطيط متطلبات المواد MRP", desc: "نظم تخطيط الإنتاج المتكاملة", duration: "29:30", views: "890", url: "https://youtu.be/_Yk4wte6tUc" },
+                { title: "إدارة المخزون الأمثل", desc: "نموذج EOQ وتقنيات التحكم في المخزون", duration: "31:20", views: "1.3K", url: "https://youtu.be/6ZtHZlYJ3Mk" },
+                { title: "المشتريات الاستراتيجية", desc: "مفاوضات الموردين واختيارهم", duration: "28:15", views: "720", url: "https://youtu.be/fH2lXON-0fY" },
+                { title: "لوجستيات النقل والتوزيع", desc: "تقنيات التخزين الحديثة", duration: "34:10", views: "580", url: "https://youtu.be/7oXgbZqWwLg" },
+                { title: "تقنيات Blockchain في سلسلة التوريد", desc: "الشفافية وتتبع المنتجات", duration: "37:25", views: "420", url: "https://youtu.be/syvmEa3gRKw" }
+            ]},
+            { id: "inteco", name: "اقتصاد دولي", icon: "fas fa-globe-asia", videos: [
+                { title: "النظريات الكلاسيكية للتجارة", desc: "الميزة النسبية والمطلقة", duration: "30:30", views: "1.7K", url: "https://youtu.be/WyVrzMJcIQA" },
+                { title: "سياسات التجارة الدولية", desc: "الرسوم الجمركية والحصص", duration: "32:45", views: "1.4K", url: "https://youtu.be/9jE9kPvYl1w" },
+                { title: "ميزان المدفوعات", desc: "تأثير تقلبات العملات على الاقتصاد", duration: "29:30", views: "1.2K", url: "https://youtu.be/5HXQ2NdnAIg" },
+                { title: "المنظمات الاقتصادية الدولية", desc: "WTO, IMF ودورها في الاقتصاد العالمي", duration: "35:20", views: "980", url: "https://youtu.be/ly9CkmK2BGA" },
+                { title: "التكامل الاقتصادي", desc: "دراسة حالة الاتحاد الأوروبي", duration: "33:15", views: "850", url: "https://youtu.be/kC6e5WcDgwQ" },
+                { title: "العولمة والاستثمار", desc: "الاستثمار الأجنبي المباشر وتأثيراته", duration: "31:40", views: "730", url: "https://youtu.be/VIaCkHxrE7k" }
+            ]},
+            { id: "taxacc", name: "المحاسبة الضريبية", icon: "fas fa-file-invoice-dollar", videos: [
+                { title: "مقدمة في النظام الضريبي", desc: "أنواع الضرائب وأساسياتها", duration: "26:30", views: "1.9K", url: "https://youtu.be/2nOfmGcx9R0" },
+                { title: "ضريبة الدخل على الأفراد", desc: "الوعاء الضريبي والإعفاءات", duration: "34:20", views: "1.6K", url: "https://youtu.be/MuWr8w_7FOw" },
+                { title: "ضريبة الدخل على الشركات", desc: "حساب الضريبة والإقرارات", duration: "31:45", views: "1.3K", url: "https://youtu.be/sAUo-bxZ-lQ" },
+                { title: "ضريبة القيمة المضافة", desc: "آلية التسجيل والخصم", duration: "28:30", views: "1.1K", url: "https://youtu.be/XWqZ_XRmqCU" },
+                { title: "الإقرارات الضريبية", desc: "نماذج الإقرارات والمواعيد", duration: "25:15", views: "890", url: "https://youtu.be/yCzWoC94m9k" },
+                { title: "التخطيط الضريبي", desc: "استراتيجيات التقليل القانوني للضرائب", duration: "36:20", views: "760", url: "https://youtu.be/dZg6TvI-jro" }
+            ]},
+            { id: "audit", name: "الرقابة والمراجعة", icon: "fas fa-clipboard-list", videos: [
+                { title: "مفاهيم التدقيق", desc: "أنواع المراجعة وأهدافها", duration: "29:30", views: "1.5K", url: "https://youtu.be/bH_sd0xUqBQ" },
+                { title: "معايير المراجعة الدولية ISA", desc: "الإطار المهني الدولي", duration: "33:20", views: "1.2K", url: "https://youtu.be/-fCqQ_y8XU8" },
+                { title: "تخطيط المراجعة", desc: "تقييم المخاطر وتحديد الأهمية النسبية", duration: "31:45", views: "980", url: "https://youtu.be/l96KjXa-FlA" },
+                { title: "إجراءات المراجعة", desc: "جمع الأدلة والإثباتات", duration: "27:30", views: "870", url: "https://youtu.be/33pzG4w5cQs" },
+                { title: "تقرير المراجعة", desc: "أنواع الرأي وصياغة التقرير", duration: "25:15", views: "760", url: "https://youtu.be/g8c1XJ6UqnI" },
+                { title: "الرقابة الداخلية", desc: "نظام الرقابة وتقييمه", duration: "34:40", views: "650", url: "https://youtu.be/fGvUa-8lFqE" }
+            ]},
+            { id: "hr", name: "الموارد البشرية", icon: "fas fa-users", videos: [
+                { title: "أساسيات إدارة الموارد البشرية", desc: "التخطيط للقوى العاملة واستراتيجيات التوظيف", duration: "28:30", views: "2.2K", url: "https://youtu.be/hj5dP_yMhAk" },
+                { title: "التوظيف والاختيار", desc: "مقابلات التقييم واختيار الكفاءات", duration: "32:15", views: "1.9K", url: "https://youtu.be/QaK1tOl6gM0" },
+                { title: "التدريب والتطوير", desc: "تنمية الكفاءات البشرية", duration: "30:45", views: "1.6K", url: "https://youtu.be/tFteNYiG-bs" },
+                { title: "تقييم الأداء", desc: "KPI ونظام 360 درجة", duration: "29:20", views: "1.4K", url: "https://youtu.be/E0nUlyOFKc8" },
+                { title: "التعويضات والحوافز", desc: "هياكل الرواتب وأنظمة المكافآت", duration: "33:10", views: "1.1K", url: "https://youtu.be/0_BlSQ6lkbY" },
+                { title: "علاقات الموظفين", desc: "قوانين العمل وحل النزاعات", duration: "31:25", views: "980", url: "https://youtu.be/sMwSQcOYsCM" }
+            ]}
+        ];
+
+        // State
+        let activeSubjectId = subjectsData[0].id;
+        let currentSearchTerm = "";
+
+        // Helper Functions
+        function getYouTubeId(url) {
+            if (!url) return null;
+            const patterns = [
+                /(?:youtube\.com\/watch\?v=)([^&]+)/i,
+                /(?:youtu\.be\/)([^?]+)/i
+            ];
+            for (let pattern of patterns) {
+                const match = url.match(pattern);
+                if (match && match[1]) return match[1];
+            }
+            return null;
+        }
+
+        function getThumbnailUrl(url) {
+            const id = getYouTubeId(url);
+            return id ? `https://img.youtube.com/vi/${id}/maxresdefault.jpg` : null;
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+        }
+
+        // Render Tabs
+        function renderTabs() {
+            const container = document.getElementById('tabsContainer');
+            if (!container) return;
+            
+            container.innerHTML = subjectsData.map(sub => `
+                <button class="tab-btn ${sub.id === activeSubjectId ? 'active' : ''}" data-id="${sub.id}">
+                    <i class="${sub.icon}"></i> ${sub.name}
+                </button>
+            `).join('');
+            
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    activeSubjectId = btn.dataset.id;
+                    renderTabs();
+                    renderVideos();
+                });
+            });
+        }
+
+        // Render Videos
+        function renderVideos() {
+            const subject = subjectsData.find(s => s.id === activeSubjectId);
+            if (!subject) return;
+            
+            let videos = subject.videos;
+            if (currentSearchTerm) {
+                const term = currentSearchTerm.toLowerCase();
+                videos = videos.filter(v => 
+                    v.title.toLowerCase().includes(term) || 
+                    v.desc.toLowerCase().includes(term)
+                );
+            }
+            
+            const container = document.getElementById('videosContainer');
+            if (!container) return;
+            
+            if (videos.length === 0) {
+                container.innerHTML = '<div class="no-results"><i class="fas fa-search fa-2x"></i><p style="margin-top: 1rem;">لا توجد نتائج مطابقة للبحث</p><p style="font-size: 0.85rem;">جرب كلمات بحث مختلفة</p></div>';
+                return;
+            }
+            
+            container.innerHTML = videos.map(video => {
+                const thumb = getThumbnailUrl(video.url);
+                return `
+                    <div class="video-card" data-url="${video.url}">
+                        <div class="video-thumbnail" style="background-image: url('${thumb || ''}'); background-size: cover;">
+                            <i class="fas fa-play-circle play-icon"></i>
+                            <span class="video-duration"><i class="far fa-clock"></i> ${video.duration}</span>
+                            <span class="subject-badge">${subject.name}</span>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">${escapeHtml(video.title)}</h3>
+                            <p class="video-description">${escapeHtml(video.desc)}</p>
+                            <div class="video-meta">
+                                <span class="video-views"><i class="far fa-eye"></i> ${video.views} مشاهدة</span>
+                            </div>
+                            <button class="watch-btn" data-url="${video.url}">
+                                <i class="fab fa-youtube"></i> مشاهدة الفيديو
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            document.querySelectorAll('.video-card, .watch-btn').forEach(el => {
+                el.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const url = el.closest('[data-url]')?.dataset.url || el.dataset.url;
+                    if (url) window.open(url, '_blank');
+                });
+            });
+        }
+
+        // Search Handler
+        function handleSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const mobileSearch = document.getElementById('mobileSearchInput');
+            currentSearchTerm = searchInput?.value || mobileSearch?.value || '';
+            if (mobileSearch && mobileSearch.value !== currentSearchTerm) {
+                mobileSearch.value = currentSearchTerm;
+            }
+            if (searchInput && searchInput.value !== currentSearchTerm) {
+                searchInput.value = currentSearchTerm;
+            }
+            renderVideos();
+        }
+
+        // Theme Toggle
+        function initTheme() {
+            const savedTheme = localStorage.getItem('accucore-theme');
+            const isDark = savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            
+            if (isDark) {
+                document.body.classList.add('dark-mode');
+                document.getElementById('themeIcon').className = 'fas fa-sun';
+            } else {
+                document.body.classList.remove('dark-mode');
+                document.getElementById('themeIcon').className = 'fas fa-moon';
+            }
+        }
+        
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            const icon = document.getElementById('themeIcon');
+            icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+            localStorage.setItem('accucore-theme', isDark ? 'dark' : 'light');
+        }
+
+        // Header Scroll Effect
+        function handleScroll() {
+            const header = document.getElementById('header');
+            const backBtn = document.getElementById('backToTop');
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / scrollHeight) * 100;
+            
+            document.getElementById('progressBar').style.width = scrollPercent + '%';
+            
+            if (scrollTop > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            if (scrollTop > 400) {
+                backBtn.classList.add('active');
+            } else {
+                backBtn.classList.remove('active');
+            }
+        }
+
+        // Initialize
+        function init() {
+            checkLoginStatus();
+            renderTabs();
+            renderVideos();
+            initTheme();
+            
+            // Lock Screen Events
+            const unlockBtn = document.getElementById('unlockBtn');
+            const studentCodeInput = document.getElementById('studentCode');
+            const studentPasswordInput = document.getElementById('studentPassword');
+            
+            unlockBtn.addEventListener('click', () => {
+                if (validateStudent()) unlockContent();
+            });
+            
+            studentCodeInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    if (validateStudent()) unlockContent();
+                }
+            });
+            studentPasswordInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    if (validateStudent()) unlockContent();
+                }
+            });
+            
+            // Logout Events
+            document.getElementById('logoutBtn').addEventListener('click', (e) => {
+                e.preventDefault();
+                logout();
+            });
+            document.getElementById('mobileLogoutBtn').addEventListener('click', (e) => {
+                e.preventDefault();
+                logout();
+            });
+            
+            // Regular Events
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+            document.getElementById('searchInput').addEventListener('input', handleSearch);
+            document.getElementById('mobileSearchInput').addEventListener('input', handleSearch);
+            document.getElementById('subscribeForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const input = e.target.querySelector('.newsletter-input');
+                if (input.value.includes('@') && input.value.includes('.')) {
+                    alert('✅ تم الاشتراك بنجاح! شكراً لانضمامك إلى مجتمع AccuCore');
+                    input.value = '';
+                } else {
+                    alert('❌ يرجى إدخال بريد إلكتروني صحيح');
+                }
+            });
+            
+            // Mobile Menu
+            const mobileBtn = document.getElementById('mobileMenuBtn');
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileClose = document.getElementById('mobileNavClose');
+            
+            mobileBtn.addEventListener('click', () => mobileNav.classList.add('active'));
+            mobileClose.addEventListener('click', () => mobileNav.classList.remove('active'));
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', () => mobileNav.classList.remove('active'));
+            });
+            
+            // Back to Top
+            document.getElementById('backToTop').addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            // Smooth scroll for nav links
+            document.querySelectorAll('.nav-link, .hero-btn').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const href = link.getAttribute('href');
+                    if (href && href.startsWith('#')) {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }
+                });
+            });
+            
+            window.addEventListener('scroll', handleScroll);
+        }
+        
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
